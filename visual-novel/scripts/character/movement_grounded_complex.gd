@@ -35,6 +35,12 @@ var _animation_tree: AnimationTree
 ## Breaking stop code
 var input_vector: Vector3 = Vector3.ZERO
 
+## Multiplies input-driven (and horizontal root-motion) locomotion speed.
+## Kept at 1.0 unless an action (e.g. RUN) modifies it. Applied when the input
+## is converted into velocity, so execution order between the Move and Run
+## actions can never race (the controller re-sends the base speed every frame).
+var speed_multiplier: float = 1.0
+
 func _ready() -> void:
 	if get_parent() is CharacterBody3D:
 		_character = get_parent()
@@ -71,11 +77,11 @@ func _physics_process(delta: float) -> void:
 		
 	
 	if _animation_tree:
-		var move_anim_speed: float = remap (speed, 0.15, 1.5, 0.0, 1.0)		
+		var move_anim_speed: float = remap (speed, 0.15, 2.0, 0.0, 1.0)		
 		# print(owner.name + ": " + str(was_on_floor))
-		# print(owner.name + ": " + str(move_anim_speed))
+		print(owner.name + ": " + str(move_anim_speed))
 		
-		_animation_tree.set("parameters/LocomotionBlend/blend_amount", clamp(move_anim_speed, 0.0, 1.0))
+		# _animation_tree.set("parameters/LocomotionBlend/blend_amount", clamp(move_anim_speed, 0.0, 1.0))
 		_animation_tree.set("parameters/Locomotion/conditions/JUMP", !was_on_floor)
 		_animation_tree.set("parameters/Locomotion/Jump/blend_position", move_anim_speed)		
 		_animation_tree.set("parameters/Locomotion/Motion/blend_position", move_anim_speed)
@@ -114,9 +120,9 @@ func _process_velocity(delta: float) -> Vector3:
 	if _animation_tree and is_movement_enabled(Behavior.ROOT_MOTION) and _animation_tree.get_root_motion_position() != Vector3.ZERO:
 		var vel: Vector3 = (_animation_tree.get_root_motion_position() / delta).rotated(Vector3.UP, _animation_tree.get_root_motion_rotation().y + _collision_shape_3d.rotation.y)
 		if is_movement_enabled(Behavior.GRAVITY):
-			_character.velocity = Vector3(-vel.x, _character.velocity.y, -vel.z)
+			_character.velocity = Vector3(-vel.x * speed_multiplier, _character.velocity.y, -vel.z * speed_multiplier)
 		else:
-			_character.velocity = Vector3(-vel.x, vel.y, -vel.z)
+			_character.velocity = Vector3(-vel.x * speed_multiplier, vel.y, -vel.z * speed_multiplier)
 		
 		if _character.velocity.y > 0:
 			disable_movement(Behavior.FLOOR_SNAP)
@@ -125,12 +131,12 @@ func _process_velocity(delta: float) -> Vector3:
 	# handle input for velocity over time
 	elif is_movement_enabled(Behavior.MOVE):
 		if input_direction:
-			input_vector = input_direction * input_magnitude
+			input_vector = input_direction * (input_magnitude * speed_multiplier)
 			if _character.is_on_floor():
 				_character.velocity = Vector3(input_vector.x, _character.velocity.y, input_vector.z)
 			else: # accelerate to direction in air instead of snapping to it like when on ground
-				_character.velocity.x = move_toward(_character.velocity.x, input_vector.x, input_magnitude * air_control)
-				_character.velocity.z = move_toward(_character.velocity.z, input_vector.z, input_magnitude * air_control)
+				_character.velocity.x = move_toward(_character.velocity.x, input_vector.x, input_magnitude * speed_multiplier * air_control)
+				_character.velocity.z = move_toward(_character.velocity.z, input_vector.z, input_magnitude * speed_multiplier * air_control)
 		elif _character.is_on_floor():
 			_character.velocity.x = move_toward(_character.velocity.x, 0, deceleration_rate)
 			_character.velocity.z = move_toward(_character.velocity.z, 0, deceleration_rate)

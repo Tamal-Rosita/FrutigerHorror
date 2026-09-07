@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cqe35jnafmlk"]
 
-[ext_resource type="Texture2D" uid="uid://b70qkbc614vpe" path="res://controller_examples/assets/textures/Purple.png" id="1_58vrm"]
-[ext_resource type="Script" uid="uid://dhuvbuvcunpgq" path="res://controller_examples/scripts/dash_pickup_trigger.gd" id="1_wlwq4"]
+[ext_resource type="Texture2D" uid="uid://b70qkbc614vpe" path="res://samples/controller_examples/assets/textures/Purple.png" id="1_58vrm"]
+[ext_resource type="Script" uid="uid://dhuvbuvcunpgq" path="res://samples/controller_examples/scripts/dash_pickup_trigger.gd" id="1_wlwq4"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_sjf01"]
 

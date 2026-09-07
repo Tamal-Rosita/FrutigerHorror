@@ -1,0 +1,78 @@
+[gd_scene load_steps=11 format=3]
+
+[sub_resource type="StandardMaterial3D" id="mat_dark"]
+albedo_color = Color(0.13, 0.14, 0.16, 1)
+metallic = 0.65
+roughness = 0.55
+
+[sub_resource type="StandardMaterial3D" id="mat_accent"]
+albedo_color = Color(0.95, 0.42, 0.16, 1)
+roughness = 0.4
+
+[sub_resource type="BoxMesh" id="box_receiver"]
+size = Vector3(0.085, 0.11, 0.36)
+
+[sub_resource type="CylinderMesh" id="cyl_barrel"]
+top_radius = 0.018
+bottom_radius = 0.018
+height = 0.46
+
+[sub_resource type="BoxMesh" id="box_handguard"]
+size = Vector3(0.065, 0.075, 0.16)
+
+[sub_resource type="BoxMesh" id="box_stock"]
+size = Vector3(0.06, 0.09, 0.22)
+
+[sub_resource type="BoxMesh" id="box_mag"]
+size = Vector3(0.055, 0.2, 0.075)
+
+[sub_resource type="BoxMesh" id="box_grip"]
+size = Vector3(0.055, 0.11, 0.06)
+
+[sub_resource type="BoxMesh" id="box_sight"]
+size = Vector3(0.02, 0.035, 0.02)
+
+[node name="Rifle" type="Node3D"]
+
+[node name="Receiver" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 0)
+mesh = SubResource("box_receiver")
+surface_material_override/0 = SubResource("mat_dark")
+
+[node name="Barrel" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0.02, -0.4)
+mesh = SubResource("cyl_barrel")
+surface_material_override/0 = SubResource("mat_dark")
+
+[node name="Handguard" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, -0.24)
+mesh = SubResource("box_handguard")
+surface_material_override/0 = SubResource("mat_dark")
+
+[node name="Stock" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 0.26)
+mesh = SubResource("box_stock")
+surface_material_override/0 = SubResource("mat_dark")
+
+[node name="Magazine" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.085, -0.02)
+mesh = SubResource("box_mag")
+surface_material_override/0 = SubResource("mat_dark")
+
+[node name="Grip" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0.1)
+mesh = SubResource("box_grip")
+surface_material_override/0 = SubResource("mat_dark")
+
+[node name="SightRear" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09, 0.08)
+mesh = SubResource("box_sight")
+surface_material_override/0 = SubResource("mat_accent")
+
+[node name="SightFront" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.085, -0.52)
+mesh = SubResource("box_sight")
+surface_material_override/0 = SubResource("mat_accent")
+
+[node name="Muzzle" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, -0.66)

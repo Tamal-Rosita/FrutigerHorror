@@ -1,12 +1,12 @@
 [gd_scene load_steps=12 format=3 uid="uid://cx6yw7mm2s808"]
 
-[ext_resource type="Script" uid="uid://3eqo7411bjwq" path="res://controller_examples/scripts/simple_character/collision_shape_3d.gd" id="1_hno04"]
-[ext_resource type="Script" uid="uid://db4vwuyfqss66" path="res://controller_examples/scripts/cameras/first_person_cam.gd" id="2_5njjn"]
-[ext_resource type="Texture2D" uid="uid://dkpqh8de7tb3n" path="res://controller_examples/assets/textures/Green.png" id="2_qgiec"]
-[ext_resource type="Script" uid="uid://cavoehjg14dyj" path="res://character_controller/scripts/action_container.gd" id="2_xir13"]
-[ext_resource type="Script" uid="uid://dn0l3kkomlwu7" path="res://controller_examples/scripts/simple_character/actions/action_move_simple.gd" id="3_hno04"]
-[ext_resource type="Script" uid="uid://cqdsr3d0jkd4b" path="res://controller_examples/scripts/simple_character/actions/action_jump_simple.gd" id="4_hk46a"]
-[ext_resource type="Script" uid="uid://dlnca6du3hovu" path="res://controller_examples/scripts/simple_character/movement_grounded_simple.gd" id="5_7v4qq"]
+[ext_resource type="Script" uid="uid://3eqo7411bjwq" path="res://samples/controller_examples/scripts/simple_character/collision_shape_3d.gd" id="1_hno04"]
+[ext_resource type="Script" uid="uid://db4vwuyfqss66" path="res://samples/controller_examples/scripts/cameras/first_person_cam.gd" id="2_5njjn"]
+[ext_resource type="Texture2D" uid="uid://dkpqh8de7tb3n" path="res://samples/controller_examples/assets/textures/Green.png" id="2_qgiec"]
+[ext_resource type="Script" uid="uid://cavoehjg14dyj" path="res://addons/character_controller/scripts/action_container.gd" id="2_xir13"]
+[ext_resource type="Script" uid="uid://dn0l3kkomlwu7" path="res://samples/controller_examples/scripts/simple_character/actions/action_move_simple.gd" id="3_hno04"]
+[ext_resource type="Script" uid="uid://cqdsr3d0jkd4b" path="res://samples/controller_examples/scripts/simple_character/actions/action_jump_simple.gd" id="4_hk46a"]
+[ext_resource type="Script" uid="uid://dlnca6du3hovu" path="res://samples/controller_examples/scripts/simple_character/movement_grounded_simple.gd" id="5_7v4qq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2hqoy"]
 radius = 0.365

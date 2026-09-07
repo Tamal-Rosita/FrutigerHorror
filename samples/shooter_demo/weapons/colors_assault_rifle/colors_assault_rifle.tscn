@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cdytsu6efsth6"]
+
+[ext_resource type="PackedScene" uid="uid://bcuvha8xy1ef2" path="res://samples/shooter_demo/weapons/colors_assault_rifle/stylized_assault_rifle__mobile-ready_game_asset.glb" id="1_dbmbs"]
+
+[node name="Sketchfab_Scene" unique_id=1202793412 instance=ExtResource("1_dbmbs")]
+
+[node name="Sketchfab_model" parent="." index="0" unique_id=1531447153]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="AssaultScar_fbx" parent="Sketchfab_model" index="0" unique_id=1573981256]
+transform = Transform3D(-4.3711387e-10, -0.01, 4.3711387e-10, 0, -4.3711387e-10, -0.01, 0.01, -4.3711387e-10, 1.9106855e-17, 0, 0, 0)

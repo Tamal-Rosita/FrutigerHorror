@@ -1,0 +1,16 @@
+[gd_resource type="Environment" format=3 uid="uid://cu5pj0xssty3a"]
+
+[ext_resource type="Texture2D" uid="uid://doyodkg1ds7td" path="res://samples/controller_examples/assets/textures/Sky.png" id="1_3k0gc"]
+
+[sub_resource type="PanoramaSkyMaterial" id="sky_mat"]
+panorama = ExtResource("1_3k0gc")
+
+[sub_resource type="Sky" id="sky"]
+sky_material = SubResource("sky_mat")
+
+[resource]
+background_mode = 2
+background_energy_multiplier = 0.9
+sky = SubResource("sky")
+tonemap_mode = 3
+glow_enabled = true

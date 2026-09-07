@@ -33,8 +33,12 @@ func _process(delta: float) -> void:
 	if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
 		return
 	
-	_input_tracking["move"] = get_input_tracking()
+	var move: Vector3 = get_input_tracking()
+	_input_tracking["move"] = move
 	evaluate_input("move")
+
+	_input_tracking["run"] = Input.is_action_pressed("run")
+	evaluate_input("run")
 
 func get_input_tracking() -> Vector3:
 	var input: Vector2 = Input.get_vector("move_left", "move_right", "move_forwards", "move_backwards") 

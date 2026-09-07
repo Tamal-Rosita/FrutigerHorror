@@ -66,8 +66,9 @@ vrm_scene = ExtResource("5_h226m")
 default_pose_amount = 0.0
 
 [node name="AnimationTree" parent="Characters/Player" index="1" unique_id=835141688]
-root_node = NodePath("../CollisionShape3D/ModelContainer/@Node3D@19705")
-anim_player = NodePath("../CollisionShape3D/ModelContainer/@Node3D@19705/AnimationPlayer")
+root_node = NodePath("../CollisionShape3D/ModelContainer/Natalia")
+anim_player = NodePath("../CollisionShape3D/ModelContainer/Natalia/AnimationPlayer")
+parameters/LocomotionBlend/blend_amount = 1.0
 
 [node name="Camera3D" parent="Characters/Player" index="2" unique_id=1029224579]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4978504, 1.25)

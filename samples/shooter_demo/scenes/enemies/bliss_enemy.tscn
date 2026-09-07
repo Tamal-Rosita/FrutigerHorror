@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://dwp15mya0swfy"]
+
+[ext_resource type="Script" uid="uid://mlp5fhr452vp" path="res://samples/shooter_demo/scripts/combat/health.gd" id="1_hp"]
+[ext_resource type="Script" uid="uid://bt3gc8kbw3tbe" path="res://samples/shooter_demo/scripts/combat/enemy_agent.gd" id="2_en"]
+
+[sub_resource type="QuadMesh" id="mesh_sky"]
+size = Vector2(3.4, 2.2)
+
+[sub_resource type="StandardMaterial3D" id="mat_sky"]
+albedo_color = Color(0.45, 0.7, 0.95, 1)
+emission_enabled = true
+emission = Color(0.35, 0.6, 0.9, 1)
+
+[sub_resource type="SphereMesh" id="mesh_hill"]
+radius = 1.5
+height = 3.0
+
+[sub_resource type="StandardMaterial3D" id="mat_hill"]
+albedo_color = Color(0.25, 0.62, 0.3, 1)
+emission_enabled = true
+emission = Color(0.15, 0.45, 0.2, 1)
+emission_energy_multiplier = 0.7
+
+[sub_resource type="BoxShape3D" id="shape_hill"]
+size = Vector3(3.4, 2.6, 0.6)
+
+[node name="BlissEnemy" type="Node3D" unique_id=833858001]
+script = ExtResource("2_en")
+chase_speed = 1.15
+attack_damage = 14
+attack_interval = 1.2
+points = 200
+
+[node name="Health" type="Node" parent="." unique_id=536157289]
+script = ExtResource("1_hp")
+max_health = 90
+
+[node name="Visual" type="MeshInstance3D" parent="." unique_id=332607840]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+mesh = SubResource("mesh_sky")
+surface_material_override/0 = SubResource("mat_sky")
+
+[node name="Hill" type="MeshInstance3D" parent="Visual" unique_id=1298368570]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0.05)
+mesh = SubResource("mesh_hill")
+surface_material_override/0 = SubResource("mat_hill")
+
+[node name="Caption" type="Label3D" parent="Visual" unique_id=909983232]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.35, -1.325)
+pixel_size = 0.007
+modulate = Color(1, 1, 1, 0.95)
+text = "WELCOME"
+font_size = 56
+outline_size = 8
+
+[node name="Body" type="StaticBody3D" parent="." unique_id=322296935]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body" unique_id=1412758403]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+shape = SubResource("shape_hill")

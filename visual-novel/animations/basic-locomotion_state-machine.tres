@@ -20,12 +20,18 @@ animation = &"basic-locomotion_library/Regular Walking"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ybftw"]
 animation = &"basic-locomotion_library/Standing Idle"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dx02s"]
+animation = &"basic-locomotion_library/Regular Running"
+
 [sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_aihfo"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_c0w8h")
-blend_point_0/pos = 0.90000004
+blend_point_0/pos = 0.9
 blend_point_1/node = SubResource("AnimationNodeAnimation_ybftw")
 blend_point_1/pos = 0.1
+blend_point_2/node = SubResource("AnimationNodeAnimation_dx02s")
+blend_point_2/pos = 1.8
 min_space = -0.02
+max_space = 2.0
 sync = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jvanm"]
@@ -49,4 +55,4 @@ states/Motion/node = SubResource("AnimationNodeBlendSpace1D_aihfo")
 states/Motion/position = Vector2(192, 182)
 states/Start/position = Vector2(-46, 100)
 transitions = ["Motion", "Jump", SubResource("AnimationNodeStateMachineTransition_jvanm"), "Jump", "Motion", SubResource("AnimationNodeStateMachineTransition_rip2l"), "Start", "Motion", SubResource("AnimationNodeStateMachineTransition_08lbb")]
-graph_offset = Vector2(-480, -351)
+graph_offset = Vector2(-295, -91)

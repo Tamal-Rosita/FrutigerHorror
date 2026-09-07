@@ -1,0 +1,99 @@
+[gd_resource type="AnimationNodeStateMachine" format=3 uid="uid://yn8bxnopm6tc"]
+
+[sub_resource type="AnimationNodeAnimation" id="Anim_walk"]
+animation = &"rifle-shooting-mvc/Walking"
+
+[sub_resource type="AnimationNodeAnimation" id="Anim_aim"]
+animation = &"rifle-shooting-mvc/Rifle Aiming Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="Anim_run"]
+animation = &"rifle-shooting-mvc/Rifle Run"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="Space_aim"]
+blend_point_0/node = SubResource("Anim_walk")
+blend_point_0/pos = 0.8
+blend_point_1/node = SubResource("Anim_aim")
+blend_point_1/pos = 0.1
+blend_point_2/node = SubResource("Anim_run")
+blend_point_2/pos = 1.6
+min_space = -0.02
+max_space = 2.0
+sync = true
+
+[sub_resource type="AnimationNodeAnimation" id="Anim_jump_stand"]
+animation = &"basic-locomotion_library/Standing Jump"
+
+[sub_resource type="AnimationNodeAnimation" id="Anim_jump_run"]
+animation = &"basic-locomotion_library/Regular Jump"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="Space_jump"]
+blend_point_0/node = SubResource("Anim_jump_stand")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("Anim_jump_run")
+blend_point_1/pos = 1.0
+min_space = 0.0
+sync = true
+
+[sub_resource type="AnimationNodeAnimation" id="Anim_idle"]
+animation = &"rifle-shooting-mvc/Rifle Idle"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="Space_motion"]
+blend_point_0/node = SubResource("Anim_walk")
+blend_point_0/pos = 0.8
+blend_point_1/node = SubResource("Anim_idle")
+blend_point_1/pos = 0.1
+blend_point_2/node = SubResource("Anim_run")
+blend_point_2/pos = 1.6
+min_space = -0.02
+max_space = 2.0
+sync = true
+
+[sub_resource type="AnimationNodeAnimation" id="Anim_reload"]
+animation = &"rifle_fast_reload/Reloading"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_enter"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_jump"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"JUMP"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_land"]
+xfade_time = 1.0
+break_loop_at_end = true
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_aim"]
+xfade_time = 0.15
+advance_mode = 2
+advance_condition = &"AIM"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_noaim"]
+xfade_time = 0.15
+advance_mode = 2
+advance_condition = &"NO_AIM"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_reload_in"]
+xfade_time = 0.12
+advance_mode = 2
+advance_condition = &"RELOADING"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="Tr_reload_out"]
+xfade_time = 0.12
+advance_mode = 2
+advance_condition = &"NO_RELOAD"
+
+[resource]
+states/Aim/node = SubResource("Space_aim")
+states/Aim/position = Vector2(460, -120)
+states/End/position = Vector2(600, 300)
+states/Jump/node = SubResource("Space_jump")
+states/Jump/position = Vector2(120, 60)
+states/Motion/node = SubResource("Space_motion")
+states/Motion/position = Vector2(120, 260)
+states/Reload/node = SubResource("Anim_reload")
+states/Reload/position = Vector2(460, 60)
+states/Start/position = Vector2(-220, 160)
+transitions = ["Start", "Motion", SubResource("Tr_enter"), "Motion", "Jump", SubResource("Tr_jump"), "Jump", "Motion", SubResource("Tr_land"), "Motion", "Aim", SubResource("Tr_aim"), "Aim", "Motion", SubResource("Tr_noaim"), "Aim", "Jump", SubResource("Tr_jump"), "Jump", "Aim", SubResource("Tr_aim"), "Motion", "Reload", SubResource("Tr_reload_in"), "Aim", "Reload", SubResource("Tr_reload_in"), "Reload", "Motion", SubResource("Tr_reload_out"), "Reload", "Aim", SubResource("Tr_reload_out")]
+graph_offset = Vector2(-397, -107)

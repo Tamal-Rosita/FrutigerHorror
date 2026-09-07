@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://dmaq2gcfm04j3"]
+
+[ext_resource type="Script" uid="uid://mlp5fhr452vp" path="res://samples/shooter_demo/scripts/combat/health.gd" id="1_hp"]
+[ext_resource type="Script" uid="uid://bt3gc8kbw3tbe" path="res://samples/shooter_demo/scripts/combat/enemy_agent.gd" id="2_en"]
+
+[sub_resource type="BoxMesh" id="mesh_win"]
+size = Vector3(1.7, 1.2, 0.09)
+
+[sub_resource type="StandardMaterial3D" id="mat_grey"]
+albedo_color = Color(0.72, 0.72, 0.76, 1)
+roughness = 0.7
+
+[sub_resource type="BoxMesh" id="mesh_bar"]
+size = Vector3(1.7, 0.22, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="mat_title"]
+albedo_color = Color(0.1, 0.3, 0.7, 1)
+roughness = 0.4
+
+[sub_resource type="BoxShape3D" id="shape_win"]
+size = Vector3(1.9, 1.4, 0.4)
+
+[node name="ErrorEnemy" type="Node3D" unique_id=1061020596]
+script = ExtResource("2_en")
+chase_speed = 2.5
+attack_damage = 7
+attack_interval = 0.7
+points = 120
+
+[node name="Health" type="Node" parent="." unique_id=13505545]
+script = ExtResource("1_hp")
+max_health = 35
+
+[node name="Visual" type="MeshInstance3D" parent="." unique_id=355714717]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+mesh = SubResource("mesh_win")
+surface_material_override/0 = SubResource("mat_grey")
+
+[node name="TitleBar" type="MeshInstance3D" parent="Visual" unique_id=441889703]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49, -0.02)
+mesh = SubResource("mesh_bar")
+surface_material_override/0 = SubResource("mat_title")
+
+[node name="Caption" type="Label3D" parent="Visual" unique_id=1996092765]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -0.18, -0.06)
+pixel_size = 0.007
+modulate = Color(0.6, 0.05, 0.05, 1)
+text = "ERROR"
+font_size = 64
+outline_size = 8
+
+[node name="Body" type="StaticBody3D" parent="." unique_id=256632294]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body" unique_id=1217509037]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+shape = SubResource("shape_win")

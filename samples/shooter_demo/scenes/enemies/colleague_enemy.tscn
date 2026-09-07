@@ -1,0 +1,85 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://samples/shooter_demo/scripts/combat/health.gd" id="1_hp"]
+[ext_resource type="Script" path="res://samples/shooter_demo/scripts/combat/enemy_agent.gd" id="2_en"]
+
+[sub_resource type="StandardMaterial3D" id="mat_suit"]
+albedo_color = Color(0.12, 0.14, 0.2, 1)
+roughness = 0.6
+
+[sub_resource type="StandardMaterial3D" id="mat_shirt"]
+albedo_color = Color(0.9, 0.92, 0.95, 1)
+roughness = 0.8
+
+[sub_resource type="StandardMaterial3D" id="mat_skin"]
+albedo_color = Color(0.82, 0.68, 0.55, 1)
+roughness = 0.7
+
+[sub_resource type="StandardMaterial3D" id="mat_tie"]
+albedo_color = Color(0.75, 0.12, 0.12, 1)
+roughness = 0.5
+
+[sub_resource type="CapsuleMesh" id="mesh_suit"]
+radius = 0.32
+height = 1.5
+
+[sub_resource type="BoxMesh" id="mesh_shirt"]
+size = Vector3(0.34, 0.24, 0.1)
+
+[sub_resource type="SphereMesh" id="mesh_head"]
+radius = 0.16
+height = 0.32
+
+[sub_resource type="BoxMesh" id="mesh_tie"]
+size = Vector3(0.07, 0.26, 0.02)
+
+[sub_resource type="BoxShape3D" id="shape_body"]
+size = Vector3(0.75, 1.9, 0.5)
+
+[node name="ColleagueEnemy" type="Node3D"]
+script = ExtResource("2_en")
+points = 100
+chase_speed = 2.1
+attack_damage = 8
+player_path = NodePath("")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("1_hp")
+max_health = 60
+
+[node name="Visual" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+mesh = SubResource("mesh_suit")
+surface_material_override/0 = SubResource("mat_suit")
+
+[node name="Shirt" type="MeshInstance3D" parent="Visual"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.06, -0.47)
+mesh = SubResource("mesh_shirt")
+surface_material_override/0 = SubResource("mat_shirt")
+
+[node name="Head" type="MeshInstance3D" parent="Visual"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.68, 0)
+mesh = SubResource("mesh_head")
+surface_material_override/0 = SubResource("mat_skin")
+
+[node name="Tie" type="MeshInstance3D" parent="Visual"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, -0.47)
+mesh = SubResource("mesh_tie")
+surface_material_override/0 = SubResource("mat_tie")
+
+[node name="Label" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.05, 0)
+text = "COLLEAGUE"
+font_size = 28
+pixel_size = 0.008
+outline_size = 8
+modulate = Color(0.85, 0.9, 1, 0.8)
+billboard = 1
+
+[node name="Body" type="StaticBody3D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+shape = SubResource("shape_body")

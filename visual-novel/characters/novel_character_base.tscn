@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cm3r2yaffj4pf" path="res://visual-novel/GJDDM/characters/packed/dorita_corona.scn" id="3_dqhvf"]
 [ext_resource type="Script" uid="uid://dghe01mlbjpjf" path="res://visual-novel/scripts/character/character_collision_shape.gd" id="4_bbd2j"]
 [ext_resource type="Script" uid="uid://damafv4htexdj" path="res://visual-novel/scripts/character/actions/action_move_simple.gd" id="5_dkogs"]
+[ext_resource type="Script" uid="uid://tya0uc8iaq2b" path="res://samples/shooter_demo/scripts/actions/action_run.gd" id="7_sel01"]
 [ext_resource type="Script" uid="uid://d3drp7l1lytlu" path="res://visual-novel/scripts/character/actions/action_jump.gd" id="9_bbd2j"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="9_dkogs"]
 [ext_resource type="Script" uid="uid://cavoehjg14dyj" path="res://addons/character_controller/scripts/action_container.gd" id="10_d1hax"]
@@ -66,6 +67,10 @@ script = ExtResource("5_dkogs")
 [node name="Jump" type="Node" parent="ActionContainer" unique_id=735427163]
 script = ExtResource("9_bbd2j")
 
+[node name="Run" type="Node" parent="ActionContainer" unique_id=1990964590]
+script = ExtResource("7_sel01")
+speed_multiplier = 2.0
+
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=835141688]
 root_node = NodePath("../CollisionShape3D/ModelContainer/DoritaCorona")
 tree_root = ExtResource("13_dca5i")
@@ -73,8 +78,8 @@ anim_player = NodePath("../CollisionShape3D/ModelContainer/DoritaCorona/Animatio
 parameters/BaseEmotion/blend_position = Vector2(-0.257, -0.482)
 parameters/Locomotion/conditions/JUMP = false
 parameters/Locomotion/Jump/blend_position = 0.0
-parameters/Locomotion/Motion/blend_position = 0.082779706
-parameters/FaceAdd/add_amount = 0.9
+parameters/Locomotion/Motion/blend_position = 0.0
+parameters/FaceAdd/add_amount = 1.0
 parameters/FaceExpression/mood/current_state = "sad"
 parameters/FaceExpression/mood/transition_request = ""
 parameters/FaceExpression/mood/current_index = 0
@@ -89,8 +94,8 @@ parameters/Gaze/blend_position = Vector2(0, 0)
 parameters/EyesAdd/add_amount = 1.0
 parameters/BlinkEyesAdd/add_amount = 1.0
 parameters/BlinkAdd/add_amount = 1.0
-parameters/LeftBlink/blend_position = 0.0
-parameters/RightBlink/blend_position = 0.0
+parameters/LeftBlink/blend_position = 1.0
+parameters/RightBlink/blend_position = 1.0
 parameters/LocomotionBlend/blend_amount = 0.0
 parameters/Pose/current_state = "idle"
 parameters/Pose/transition_request = ""

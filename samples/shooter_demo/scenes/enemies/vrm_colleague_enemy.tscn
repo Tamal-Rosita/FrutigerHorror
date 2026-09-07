@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://samples/shooter_demo/scripts/combat/health.gd" id="1_hp"]
+[ext_resource type="Script" path="res://samples/shooter_demo/scripts/combat/vrm_colleague_enemy.gd" id="2_vrm"]
+[ext_resource type="Script" path="res://visual-novel/scripts/character/novel_character.gd" id="3_char"]
+
+[node name="VrmColleagueEnemy" type="Node3D"]
+script = ExtResource("2_vrm")
+points = 150
+chase_speed = 2.4
+
+[node name="Character" type="Node3D" parent="."]
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("1_hp")
+max_health = 80

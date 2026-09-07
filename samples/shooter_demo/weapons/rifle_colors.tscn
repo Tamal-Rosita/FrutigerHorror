@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://csd375f4ra5qj"]
+
+[ext_resource type="PackedScene" uid="uid://cdytsu6efsth6" path="res://samples/shooter_demo/weapons/colors_assault_rifle/colors_assault_rifle.tscn" id="1_eyb2n"]
+
+[sub_resource type="BoxMesh" id="box_receiver"]
+size = Vector3(0.085, 0.11, 0.36)
+
+[sub_resource type="StandardMaterial3D" id="mat_dark"]
+albedo_color = Color(0.13, 0.14, 0.16, 1)
+metallic = 0.65
+roughness = 0.55
+
+[sub_resource type="CylinderMesh" id="cyl_barrel"]
+top_radius = 0.018
+bottom_radius = 0.018
+height = 0.46
+
+[sub_resource type="BoxMesh" id="box_handguard"]
+size = Vector3(0.065, 0.075, 0.16)
+
+[sub_resource type="BoxMesh" id="box_stock"]
+size = Vector3(0.06, 0.09, 0.22)
+
+[sub_resource type="BoxMesh" id="box_mag"]
+size = Vector3(0.055, 0.2, 0.075)
+
+[sub_resource type="BoxMesh" id="box_grip"]
+size = Vector3(0.055, 0.11, 0.06)
+
+[sub_resource type="BoxMesh" id="box_sight"]
+size = Vector3(0.02, 0.035, 0.02)
+
+[sub_resource type="StandardMaterial3D" id="mat_accent"]
+albedo_color = Color(0.95, 0.42, 0.16, 1)
+roughness = 0.4
+
+[node name="Rifle" type="Node3D" unique_id=347577767]
+
+[node name="Receiver" type="MeshInstance3D" parent="." unique_id=911294527]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 0)
+visible = false
+mesh = SubResource("box_receiver")
+surface_material_override/0 = SubResource("mat_dark")
+
+[node name="Barrel" type="MeshInstance3D" parent="." unique_id=596840595]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0.02, -0.4)
+visible = false
+mesh = SubResource("cyl_barrel")
+surface_material_override/0 = SubResource("mat_dark")
+
+[node name="Handguard" type="MeshInstance3D" parent="." unique_id=1494682699]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, -0.24)
+visible = false
+mesh = SubResource("box_handguard")
+surface_material_override/0 = SubResource("mat_dark")
+
+[node name="Stock" type="MeshInstance3D" parent="." unique_id=1829844953]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 0.26)
+visible = false
+mesh = SubResource("box_stock")
+surface_material_override/0 = SubResource("mat_dark")
+
+[node name="Magazine" type="MeshInstance3D" parent="." unique_id=385135771]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.085, -0.02)
+visible = false
+mesh = SubResource("box_mag")
+surface_material_override/0 = SubResource("mat_dark")
+
+[node name="Grip" type="MeshInstance3D" parent="." unique_id=1057000483]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0.1)
+visible = false
+mesh = SubResource("box_grip")
+surface_material_override/0 = SubResource("mat_dark")
+
+[node name="SightRear" type="MeshInstance3D" parent="." unique_id=1650868987]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09, 0.08)
+visible = false
+mesh = SubResource("box_sight")
+surface_material_override/0 = SubResource("mat_accent")
+
+[node name="SightFront" type="MeshInstance3D" parent="." unique_id=54564102]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.085, -0.52)
+visible = false
+mesh = SubResource("box_sight")
+surface_material_override/0 = SubResource("mat_accent")
+
+[node name="Muzzle" type="Node3D" parent="." unique_id=1164074576]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.037334666, -0.61472774)
+
+[node name="Sketchfab_Scene" parent="." unique_id=1202793412 instance=ExtResource("1_eyb2n")]
+transform = Transform3D(0.6089904, 0.0036214113, 0.034894757, 0, 0.60674125, -0.06296819, -0.03508217, 0.06286397, 0.605737, 0.028318644, -0.030949973, 0.08134459)

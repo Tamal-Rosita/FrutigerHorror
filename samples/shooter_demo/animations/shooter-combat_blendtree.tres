@@ -1,0 +1,194 @@
+[gd_resource type="AnimationNodeBlendTree" format=3 uid="uid://dx2b4jcb4wi7y"]
+
+[ext_resource type="AnimationNodeBlendSpace2D" uid="uid://b8y7ptxnl4w76" path="res://visual-novel/animations/face-emotions_blend-space2d.tres" id="1_rfivk"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://cqttxdeqj08lr" path="res://visual-novel/animations/face-animation_blendtree.res" id="2_jnvbf"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://yn8bxnopm6tc" path="res://visual-novel/animations/rifle-locomotion_state-machine.tres" id="3_1c22v"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wylqr"]
+animation = &"basic-dancing_library/Shuffling"
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_cnjg4"]
+filters = ["%GeneralSkeleton/EyeExtra:EyeExtra_01.M_F00_000_00_EyeExtra_On", "%GeneralSkeleton/Face:Face.M_F00_000_00_Fcl_ALL_Angry", "%GeneralSkeleton/Face:Face.M_F00_000_00_Fcl_ALL_Fun", "%GeneralSkeleton/Face:Face.M_F00_000_00_Fcl_ALL_Joy", "%GeneralSkeleton/Face:Face.M_F00_000_00_Fcl_ALL_Sorrow", "%GeneralSkeleton/Face:Face.M_F00_000_00_Fcl_ALL_Surprised", "%GeneralSkeleton/Face:Face.M_F00_000_00_Fcl_EYE_Close", "%GeneralSkeleton/Face:Face.M_F00_000_00_Fcl_EYE_Close_L", "%GeneralSkeleton/Face:Face.M_F00_000_00_Fcl_EYE_Close_R", "%GeneralSkeleton/Face:Face.M_F00_000_00_Fcl_EYE_Extra", "%GeneralSkeleton/Face:Face.M_F00_000_00_Fcl_MTH_A", "%GeneralSkeleton/Face:Face.M_F00_000_00_Fcl_MTH_E", "%GeneralSkeleton/Face:Face.M_F00_000_00_Fcl_MTH_I", "%GeneralSkeleton/Face:Face.M_F00_000_00_Fcl_MTH_O", "%GeneralSkeleton/Face:Face.M_F00_000_00_Fcl_MTH_U"]
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_jnvbf"]
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_rfivk"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rfivk"]
+animation = &"female_idle_actions_library/Crying"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_rfivk"]
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_e4uwh"]
+
+[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_w1isf"]
+filters = ["%GeneralSkeleton/EyeExtra:EyeExtra_01.M_F00_000_00_EyeExtra_On", "%GeneralSkeleton/Face:Face.M_F00_000_00_Fcl_ALL_Angry", "%GeneralSkeleton/Face:Face.M_F00_000_00_Fcl_ALL_Fun", "%GeneralSkeleton/Face:Face.M_F00_000_00_Fcl_ALL_Joy", "%GeneralSkeleton/Face:Face.M_F00_000_00_Fcl_ALL_Sorrow", "%GeneralSkeleton/Face:Face.M_F00_000_00_Fcl_ALL_Surprised", "%GeneralSkeleton/Face:Face.M_F00_000_00_Fcl_EYE_Close", "%GeneralSkeleton/Face:Face.M_F00_000_00_Fcl_EYE_Close_L", "%GeneralSkeleton/Face:Face.M_F00_000_00_Fcl_EYE_Close_R", "%GeneralSkeleton/Face:Face.M_F00_000_00_Fcl_EYE_Extra", "%GeneralSkeleton/Face:Face.M_F00_000_00_Fcl_MTH_A", "%GeneralSkeleton/Face:Face.M_F00_000_00_Fcl_MTH_E", "%GeneralSkeleton/Face:Face.M_F00_000_00_Fcl_MTH_I", "%GeneralSkeleton/Face:Face.M_F00_000_00_Fcl_MTH_O", "%GeneralSkeleton/Face:Face.M_F00_000_00_Fcl_MTH_U"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xp6r4"]
+animation = &"basic-dancing_library/Flair"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_j16mc"]
+animation = &"lookUp"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kusb5"]
+animation = &"lookDown"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_e6e8b"]
+animation = &"lookRight"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p4tl3"]
+animation = &"lookLeft"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_leu68"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_j16mc")
+blend_point_0/pos = Vector2(0, 1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_kusb5")
+blend_point_1/pos = Vector2(0, -1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_e6e8b")
+blend_point_2/pos = Vector2(1, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_p4tl3")
+blend_point_3/pos = Vector2(-1, 0)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qrnuj"]
+animation = &"mixamo-female_locomotion/Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vn8jc"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2c55i"]
+animation = &"blinkLeft"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_4djv5"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_vn8jc")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_2c55i")
+blend_point_1/pos = 1.0
+min_space = 0.0
+value_label = "0"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_rfivk"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7w10x"]
+animation = &"rifle-shooting-mvc/Rifle Idle"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_jnvbf"]
+input_0/name = "reset"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "idle"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+input_2/name = "crying"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
+input_3/name = "dancing"
+input_3/auto_advance = false
+input_3/break_loop_at_end = false
+input_3/reset = true
+input_4/name = "metro_standing"
+input_4/auto_advance = false
+input_4/break_loop_at_end = false
+input_4/reset = true
+input_5/name = "sitting"
+input_5/auto_advance = false
+input_5/break_loop_at_end = false
+input_5/reset = true
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jnvbf"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1c22v"]
+animation = &"blinkRight"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_xp6r4"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_jnvbf")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_1c22v")
+blend_point_1/pos = 1.0
+min_space = 0.0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8l717"]
+animation = &"basic-dancing_library/Rumba Dancing"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vw4qr"]
+animation = &"basic-dancing_library/Silly Dancing"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v2pra"]
+animation = &"female_idle_actions_library/Sitting Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4djv5"]
+animation = &"mixamo-female_locomotion/Female Standing Pose(3)"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_wylqr"]
+input_0/name = "flair"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "rumba"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+input_2/name = "silly"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
+input_3/name = "shuffling"
+input_3/auto_advance = false
+input_3/break_loop_at_end = false
+input_3/reset = true
+
+[resource]
+graph_offset = Vector2(-99.95563, -373.4287)
+nodes/output/position = Vector2(1640, 100)
+nodes/BaseEmotion/node = ExtResource("1_rfivk")
+nodes/BaseEmotion/position = Vector2(300, 140)
+nodes/Locomotion/node = ExtResource("3_1c22v")
+nodes/Locomotion/position = Vector2(500, -340)
+nodes/FaceAdd/node = SubResource("AnimationNodeAdd2_w1isf")
+nodes/FaceAdd/position = Vector2(1440, 60)
+nodes/FaceExpression/node = ExtResource("2_jnvbf")
+nodes/FaceExpression/position = Vector2(300, -20)
+nodes/BaseEmotionAdd/node = SubResource("AnimationNodeAdd2_cnjg4")
+nodes/BaseEmotionAdd/position = Vector2(680, 40)
+nodes/Gaze/node = SubResource("AnimationNodeBlendSpace2D_leu68")
+nodes/Gaze/position = Vector2(300, 380)
+nodes/EyesAdd/node = SubResource("AnimationNodeAdd2_e4uwh")
+nodes/EyesAdd/position = Vector2(1020, 220)
+nodes/BlinkEyesAdd/node = SubResource("AnimationNodeAdd2_rfivk")
+nodes/BlinkEyesAdd/position = Vector2(540, 500)
+nodes/BlinkAdd/node = SubResource("AnimationNodeAdd2_jnvbf")
+nodes/BlinkAdd/position = Vector2(760, 360)
+nodes/LeftBlink/node = SubResource("AnimationNodeBlendSpace1D_4djv5")
+nodes/LeftBlink/position = Vector2(300, 620)
+nodes/RightBlink/node = SubResource("AnimationNodeBlendSpace1D_xp6r4")
+nodes/RightBlink/position = Vector2(300, 820)
+nodes/LocomotionBlend/node = SubResource("AnimationNodeBlend2_rfivk")
+nodes/LocomotionBlend/position = Vector2(880, -480)
+nodes/Pose/node = SubResource("AnimationNodeTransition_jnvbf")
+nodes/Pose/position = Vector2(280, -420)
+nodes/Crying/node = SubResource("AnimationNodeAnimation_rfivk")
+nodes/Crying/position = Vector2(-280, -440)
+nodes/Flair/node = SubResource("AnimationNodeAnimation_xp6r4")
+nodes/Flair/position = Vector2(-1120, -480)
+nodes/DancingSpeed/node = SubResource("AnimationNodeTimeScale_rfivk")
+nodes/DancingSpeed/position = Vector2(-500, -320)
+nodes/StandingRelaxPose/node = SubResource("AnimationNodeAnimation_4djv5")
+nodes/StandingRelaxPose/position = Vector2(-300, -220)
+nodes/Sitting/node = SubResource("AnimationNodeAnimation_v2pra")
+nodes/Sitting/position = Vector2(-300, -40)
+nodes/Idle/node = SubResource("AnimationNodeAnimation_qrnuj")
+nodes/Idle/position = Vector2(-280, -620)
+nodes/Transition/node = SubResource("AnimationNodeTransition_wylqr")
+nodes/Transition/position = Vector2(-720, -380)
+nodes/Rumba/node = SubResource("AnimationNodeAnimation_8l717")
+nodes/Rumba/position = Vector2(-1160, -300)
+nodes/Silly/node = SubResource("AnimationNodeAnimation_vw4qr")
+nodes/Silly/position = Vector2(-1160, -120)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_wylqr")
+nodes/Animation/position = Vector2(-1140, 80)
+nodes/None/node = SubResource("AnimationNodeAnimation_7w10x")
+nodes/None/position = Vector2(-160, 180)
+node_connections = [&"output", 0, &"FaceAdd", &"FaceAdd", 0, &"LocomotionBlend", &"FaceAdd", 1, &"EyesAdd", &"BaseEmotionAdd", 0, &"FaceExpression", &"BaseEmotionAdd", 1, &"BaseEmotion", &"EyesAdd", 0, &"BaseEmotionAdd", &"EyesAdd", 1, &"BlinkAdd", &"BlinkEyesAdd", 0, &"LeftBlink", &"BlinkEyesAdd", 1, &"RightBlink", &"BlinkAdd", 0, &"Gaze", &"BlinkAdd", 1, &"BlinkEyesAdd", &"LocomotionBlend", 0, &"Pose", &"LocomotionBlend", 1, &"Locomotion", &"Pose", 0, &"Idle", &"Pose", 1, &"Crying", &"Pose", 2, &"DancingSpeed", &"Pose", 3, &"StandingRelaxPose", &"Pose", 4, &"Sitting", &"Pose", 5, &"None", &"DancingSpeed", 0, &"Transition", &"Transition", 0, &"Flair", &"Transition", 1, &"Rumba", &"Transition", 2, &"Silly", &"Transition", 3, &"Animation"]

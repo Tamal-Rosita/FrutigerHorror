@@ -1,0 +1,174 @@
+[gd_scene format=3 uid="uid://by2f1oqplflin"]
+
+[ext_resource type="PackedScene" uid="uid://cjxe0v2258fy1" path="res://samples/shooter_demo/characters/shooter_player.tscn" id="1_player"]
+[ext_resource type="PackedScene" path="res://samples/shooter_demo/scenes/shooter_hud.tscn" id="2_hud"]
+[ext_resource type="Environment" uid="uid://cu5pj0xssty3a" path="res://samples/shooter_demo/scenes/sunny-cloud_environment.tres" id="2_hwhs6"]
+[ext_resource type="PackedScene" path="res://samples/shooter_demo/scenes/shooter_settings.tscn" id="3_menu"]
+[ext_resource type="Script" uid="uid://caigcps64adue" path="res://samples/shooter_demo/scripts/controllers/controller_player_shooter.gd" id="4_ctrl"]
+[ext_resource type="Script" uid="uid://cdhj5gruoyjwg" path="res://visual-novel/scripts/actions/pointer_capture.gd" id="5_ptr"]
+[ext_resource type="Script" uid="uid://cuqj7p44stre8" path="res://samples/shooter_demo/scripts/combat/score_keeper.gd" id="6_sk"]
+[ext_resource type="Script" uid="uid://cq2i7w03jxmf0" path="res://samples/shooter_demo/scripts/level/arena_director.gd" id="7_dir"]
+
+[sub_resource type="StandardMaterial3D" id="mat_floor"]
+albedo_color = Color(0.13, 0.15, 0.18, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="mat_wall"]
+albedo_color = Color(0.07, 0.09, 0.13, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="mat_strip"]
+albedo_color = Color(0.3, 0.9, 0.85, 1)
+emission_enabled = true
+emission = Color(0.2, 0.8, 0.75, 1)
+emission_energy_multiplier = 2.2
+
+[sub_resource type="StandardMaterial3D" id="mat_strip2"]
+albedo_color = Color(0.6, 0.95, 0.4, 1)
+emission_enabled = true
+emission = Color(0.5, 0.9, 0.3, 1)
+emission_energy_multiplier = 1.6
+
+[sub_resource type="SphereMesh" id="mesh_bubble"]
+radius = 0.6
+height = 1.2
+
+[sub_resource type="StandardMaterial3D" id="mat_bubble"]
+transparency = 1
+albedo_color = Color(0.55, 0.9, 1, 0.16)
+metallic = 0.6
+roughness = 0.1
+
+[node name="ShooterArena" type="Node3D" unique_id=1899238019]
+script = ExtResource("7_dir")
+player_path = NodePath("Characters/Player")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=759532026]
+environment = ExtResource("2_hwhs6")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=113170068]
+transform = Transform3D(-0.8, -0.5, 0.33, 0.4, -0.86, 0.33, 0.45, 0, 0.89, 0, 8, 0)
+light_color = Color(0.7, 0.85, 1, 1)
+light_energy = 0.8
+shadow_enabled = true
+
+[node name="Characters" type="Node" parent="." unique_id=997781021]
+
+[node name="Player" parent="Characters" unique_id=1280169849 instance=ExtResource("1_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+
+[node name="Controllers" type="Node" parent="." unique_id=68405105]
+script = ExtResource("5_ptr")
+
+[node name="PlayerController" type="Node" parent="Controllers" unique_id=479403219 node_paths=PackedStringArray("controlled_obj")]
+script = ExtResource("4_ctrl")
+controlled_obj = NodePath("../../Characters/Player")
+
+[node name="ScoreKeeper" type="Node" parent="." unique_id=1221582886]
+script = ExtResource("6_sk")
+
+[node name="HUD" parent="." unique_id=1821230634 instance=ExtResource("2_hud")]
+player_path = NodePath("../Characters/Player")
+
+[node name="PauseMenu" parent="." unique_id=749591398 instance=ExtResource("3_menu")]
+player_path = NodePath("../Characters/Player")
+
+[node name="Enemies" type="Node" parent="." unique_id=304746304]
+
+[node name="Pickups" type="Node" parent="."]
+
+[node name="Level" type="Node" parent="." unique_id=878302411]
+
+[node name="Floor" type="CSGBox3D" parent="Level" unique_id=667063192]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+use_collision = true
+size = Vector3(80, 0.5, 80)
+material = SubResource("mat_floor")
+
+[node name="WallN" type="CSGBox3D" parent="Level" unique_id=1622640396]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -40)
+use_collision = true
+size = Vector3(80, 5, 0.5)
+material = SubResource("mat_wall")
+
+[node name="WallS" type="CSGBox3D" parent="Level" unique_id=468720671]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 40)
+use_collision = true
+size = Vector3(80, 5, 0.5)
+material = SubResource("mat_wall")
+
+[node name="WallE" type="CSGBox3D" parent="Level" unique_id=909404021]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 2.5, 0)
+use_collision = true
+size = Vector3(0.5, 5, 80)
+material = SubResource("mat_wall")
+
+[node name="WallW" type="CSGBox3D" parent="Level" unique_id=62892508]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 2.5, 0)
+use_collision = true
+size = Vector3(0.5, 5, 80)
+material = SubResource("mat_wall")
+
+[node name="CoverA" type="CSGBox3D" parent="Level" unique_id=216223358]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0.6, -4)
+use_collision = true
+size = Vector3(3, 1.2, 0.6)
+material = SubResource("mat_floor")
+
+[node name="CoverB" type="CSGBox3D" parent="Level" unique_id=1537114425]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.6, 4)
+use_collision = true
+size = Vector3(3, 1.2, 0.6)
+material = SubResource("mat_floor")
+
+[node name="CoverC" type="CSGBox3D" parent="Level" unique_id=717884843]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.6, 6)
+use_collision = true
+size = Vector3(2.2, 1.2, 2.2)
+material = SubResource("mat_floor")
+
+[node name="CoverD" type="CSGBox3D" parent="Level" unique_id=1161781747]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.6, -6)
+use_collision = true
+size = Vector3(2.2, 1.2, 2.2)
+material = SubResource("mat_floor")
+
+[node name="Strip1" type="CSGBox3D" parent="Level" unique_id=1539341268]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 4.4, -39.75)
+size = Vector3(3, 0.18, 0.1)
+material = SubResource("mat_strip")
+
+[node name="Strip2" type="CSGBox3D" parent="Level" unique_id=820026994]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 4.4, -39.75)
+size = Vector3(3, 0.18, 0.1)
+material = SubResource("mat_strip")
+
+[node name="Strip3" type="CSGBox3D" parent="Level" unique_id=1160121989]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 4.4, -39.75)
+size = Vector3(3, 0.18, 0.1)
+material = SubResource("mat_strip2")
+
+[node name="Strip4" type="CSGBox3D" parent="Level" unique_id=1628075026]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 4.4, -39.75)
+size = Vector3(3, 0.18, 0.1)
+material = SubResource("mat_strip2")
+
+[node name="Bubble1" type="MeshInstance3D" parent="Level" unique_id=1051724707]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 3.2, -12)
+mesh = SubResource("mesh_bubble")
+surface_material_override/0 = SubResource("mat_bubble")
+
+[node name="Bubble2" type="MeshInstance3D" parent="Level" unique_id=1883902035]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 2.6, -9)
+mesh = SubResource("mesh_bubble")
+surface_material_override/0 = SubResource("mat_bubble")
+
+[node name="Bubble3" type="MeshInstance3D" parent="Level" unique_id=917275633]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 2.4, 10)
+mesh = SubResource("mesh_bubble")
+surface_material_override/0 = SubResource("mat_bubble")
+
+[node name="Bubble4" type="MeshInstance3D" parent="Level" unique_id=841966875]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3.4, 13)
+mesh = SubResource("mesh_bubble")
+surface_material_override/0 = SubResource("mat_bubble")
