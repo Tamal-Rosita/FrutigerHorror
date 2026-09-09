@@ -1,0 +1,203 @@
+[gd_scene format=3 uid="uid://0jj3yf6p6c0b"]
+
+[ext_resource type="Script" uid="uid://dlg37w7qr0nd0" path="res://samples/shooter_demo/scripts/ui/shooter_settings.gd" id="1_set"]
+[ext_resource type="Theme" uid="uid://b4ewij362t7jg" path="res://samples/shooter_demo/ui/shooter_theme.tres" id="2_thm"]
+
+[node name="ShooterSettings" type="CanvasLayer" unique_id=475825671]
+script = ExtResource("1_set")
+
+[node name="Backdrop" type="ColorRect" parent="." unique_id=334180537]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.005, 0.02, 0.05, 0.72)
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=1671920493]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -297.5
+offset_top = -210.0
+offset_right = 297.5
+offset_bottom = 210.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_thm")
+
+[node name="Margin" type="MarginContainer" parent="Panel" unique_id=546306321]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 20
+
+[node name="Main" type="VBoxContainer" parent="Panel/Margin" unique_id=128219589]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="Panel/Margin/Main" unique_id=712120282]
+layout_mode = 2
+theme_type_variation = &"MenuTitle"
+text = "PAUSA"
+horizontal_alignment = 1
+
+[node name="Resume" type="Button" parent="Panel/Margin/Main" unique_id=1114515439]
+layout_mode = 2
+text = "Reanudar (ESC)"
+
+[node name="Restart" type="Button" parent="Panel/Margin/Main" unique_id=1942223639]
+layout_mode = 2
+text = "Reiniciar partida"
+
+[node name="SettingsButton" type="Button" parent="Panel/Margin/Main" unique_id=1976267391]
+layout_mode = 2
+text = "Configuración"
+
+[node name="DebugButton" type="Button" parent="Panel/Margin/Main" unique_id=221155697]
+layout_mode = 2
+text = "Depuración (Desarrollador)"
+
+[node name="Quit" type="Button" parent="Panel/Margin/Main" unique_id=1573115522]
+layout_mode = 2
+text = "Salir"
+
+[node name="Settings" type="VBoxContainer" parent="Panel/Margin" unique_id=1918753662]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="Panel/Margin/Settings" unique_id=818534125]
+layout_mode = 2
+theme_type_variation = &"MenuTitle"
+text = "CONFIGURACIÓN"
+horizontal_alignment = 1
+
+[node name="RowVolume" type="HBoxContainer" parent="Panel/Margin/Settings" unique_id=348029825]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/Margin/Settings/RowVolume" unique_id=141741766]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+text = "Volumen general"
+
+[node name="Slider" type="HSlider" parent="Panel/Margin/Settings/RowVolume" unique_id=1891078968]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -40.0
+max_value = 0.0
+
+[node name="Value" type="Label" parent="Panel/Margin/Settings/RowVolume" unique_id=1148402443]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "0 dB"
+horizontal_alignment = 2
+
+[node name="Back" type="Button" parent="Panel/Margin/Settings" unique_id=867610950]
+layout_mode = 2
+text = "Volver"
+
+[node name="Debug" type="VBoxContainer" parent="Panel/Margin" unique_id=1109233603]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="Panel/Margin/Debug" unique_id=1419592973]
+layout_mode = 2
+theme_type_variation = &"MenuTitle"
+text = "DEPURACIÓN (DESARROLLADOR)"
+horizontal_alignment = 1
+
+[node name="RowDistance" type="HBoxContainer" parent="Panel/Margin/Debug" unique_id=1835990144]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/Margin/Debug/RowDistance" unique_id=88248809]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+text = "Distancia de cámara"
+
+[node name="Slider" type="HSlider" parent="Panel/Margin/Debug/RowDistance" unique_id=1674990314]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.6
+max_value = 6.0
+step = 0.05
+value = 2.4
+
+[node name="Value" type="Label" parent="Panel/Margin/Debug/RowDistance" unique_id=932518713]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "2.4 m"
+horizontal_alignment = 2
+
+[node name="RowShoulder" type="HBoxContainer" parent="Panel/Margin/Debug" unique_id=1495357927]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/Margin/Debug/RowShoulder" unique_id=138270725]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+text = "Desplazamiento del hombro"
+
+[node name="Slider" type="HSlider" parent="Panel/Margin/Debug/RowShoulder" unique_id=1680101386]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -1.5
+max_value = 1.5
+step = 0.05
+value = 0.3500000000000001
+
+[node name="Value" type="Label" parent="Panel/Margin/Debug/RowShoulder" unique_id=96499625]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "0.35"
+horizontal_alignment = 2
+
+[node name="RowSens" type="HBoxContainer" parent="Panel/Margin/Debug" unique_id=1598703027]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/Margin/Debug/RowSens" unique_id=1217290258]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+text = "Sensibilidad del ratón"
+
+[node name="Slider" type="HSlider" parent="Panel/Margin/Debug/RowSens" unique_id=1110201624]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.0005
+max_value = 0.02
+step = 0.0005
+value = 0.004999999999999999
+
+[node name="Value" type="Label" parent="Panel/Margin/Debug/RowSens" unique_id=65888974]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "0.005"
+horizontal_alignment = 2
+
+[node name="RowAdsFov" type="HBoxContainer" parent="Panel/Margin/Debug" unique_id=1779886992]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/Margin/Debug/RowAdsFov" unique_id=2057363636]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+text = "FOV al apuntar"
+
+[node name="Slider" type="HSlider" parent="Panel/Margin/Debug/RowAdsFov" unique_id=174896291]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 30.0
+max_value = 80.0
+value = 40.0
+
+[node name="Value" type="Label" parent="Panel/Margin/Debug/RowAdsFov" unique_id=1101521729]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "40 fov"
+horizontal_alignment = 2
+
+[node name="Back" type="Button" parent="Panel/Margin/Debug" unique_id=423145112]
+layout_mode = 2
+text = "Volver"

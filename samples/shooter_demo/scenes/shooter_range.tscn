@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://blaotcm62cyv6"]
 
 [ext_resource type="Environment" uid="uid://cu5pj0xssty3a" path="res://samples/shooter_demo/scenes/sunny-cloud_environment.tres" id="1_3yw52"]
-[ext_resource type="PackedScene" path="res://samples/shooter_demo/scenes/shooter_hud.tscn" id="1_hud"]
+[ext_resource type="PackedScene" uid="uid://un017tn1kqlu" path="res://samples/shooter_demo/scenes/ui/shooter_hud.tscn" id="1_hud"]
 [ext_resource type="PackedScene" uid="uid://cjxe0v2258fy1" path="res://samples/shooter_demo/characters/shooter_player.tscn" id="2_player"]
 [ext_resource type="Script" uid="uid://caigcps64adue" path="res://samples/shooter_demo/scripts/controllers/controller_player_shooter.gd" id="3_ctrl"]
-[ext_resource type="Script" uid="uid://cdhj5gruoyjwg" path="res://visual-novel/scripts/actions/pointer_capture.gd" id="4_ptr"]
-[ext_resource type="PackedScene" path="res://samples/shooter_demo/scenes/target_dummy.tscn" id="6_dummy"]
-[ext_resource type="PackedScene" path="res://samples/shooter_demo/scenes/prop_crate.tscn" id="7_crate"]
+[ext_resource type="Script" uid="uid://dhb3ah3ahdfgo" path="res://samples/shooter_demo/scripts/ui/gameplay_pointer.gd" id="4_ptr"]
+[ext_resource type="PackedScene" path="res://samples/shooter_demo/scenes/props/target_dummy.tscn" id="6_dummy"]
+[ext_resource type="PackedScene" path="res://samples/shooter_demo/scenes/props/prop_crate.tscn" id="7_crate"]
 [ext_resource type="Script" uid="uid://cuqj7p44stre8" path="res://samples/shooter_demo/scripts/combat/score_keeper.gd" id="8_sk"]
-[ext_resource type="PackedScene" path="res://samples/shooter_demo/scenes/shooter_settings.tscn" id="9_settings"]
+[ext_resource type="PackedScene" uid="uid://0jj3yf6p6c0b" path="res://samples/shooter_demo/scenes/ui/shooter_settings.tscn" id="9_settings"]
 
 [sub_resource type="StandardMaterial3D" id="mat_plank_a"]
 albedo_color = Color(0.9, 0.35, 0.3, 1)

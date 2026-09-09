@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="Script" path="res://samples/shooter_demo/scripts/combat/health.gd" id="1_hp"]
 [ext_resource type="Script" path="res://samples/shooter_demo/scripts/combat/enemy_agent.gd" id="2_en"]
+[ext_resource type="FontFile" uid="uid://mvq2bh8e0nko" path="res://samples/shooter_demo/fonts/ChakraPetch-SemiBold.ttf" id="3_fnt"]
 
 [sub_resource type="StandardMaterial3D" id="mat_suit"]
 albedo_color = Color(0.12, 0.14, 0.2, 1)
@@ -69,7 +70,8 @@ surface_material_override/0 = SubResource("mat_tie")
 
 [node name="Label" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.05, 0)
-text = "COLLEAGUE"
+font = ExtResource("3_fnt")
+text = "COLEGA"
 font_size = 28
 pixel_size = 0.008
 outline_size = 8

@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://by2f1oqplflin"]
 
 [ext_resource type="PackedScene" uid="uid://cjxe0v2258fy1" path="res://samples/shooter_demo/characters/shooter_player.tscn" id="1_player"]
-[ext_resource type="PackedScene" path="res://samples/shooter_demo/scenes/shooter_hud.tscn" id="2_hud"]
+[ext_resource type="PackedScene" uid="uid://un017tn1kqlu" path="res://samples/shooter_demo/scenes/ui/shooter_hud.tscn" id="2_hud"]
 [ext_resource type="Environment" uid="uid://cu5pj0xssty3a" path="res://samples/shooter_demo/scenes/sunny-cloud_environment.tres" id="2_hwhs6"]
-[ext_resource type="PackedScene" path="res://samples/shooter_demo/scenes/shooter_settings.tscn" id="3_menu"]
+[ext_resource type="PackedScene" uid="uid://0jj3yf6p6c0b" path="res://samples/shooter_demo/scenes/ui/shooter_settings.tscn" id="3_menu"]
 [ext_resource type="Script" uid="uid://caigcps64adue" path="res://samples/shooter_demo/scripts/controllers/controller_player_shooter.gd" id="4_ctrl"]
-[ext_resource type="Script" uid="uid://cdhj5gruoyjwg" path="res://visual-novel/scripts/actions/pointer_capture.gd" id="5_ptr"]
+[ext_resource type="Script" uid="uid://dhb3ah3ahdfgo" path="res://samples/shooter_demo/scripts/ui/gameplay_pointer.gd" id="5_ptr"]
 [ext_resource type="Script" uid="uid://cuqj7p44stre8" path="res://samples/shooter_demo/scripts/combat/score_keeper.gd" id="6_sk"]
 [ext_resource type="Script" uid="uid://cq2i7w03jxmf0" path="res://samples/shooter_demo/scripts/level/arena_director.gd" id="7_dir"]
 
@@ -47,7 +47,7 @@ player_path = NodePath("Characters/Player")
 environment = ExtResource("2_hwhs6")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=113170068]
-transform = Transform3D(-0.8, -0.5, 0.33, 0.4, -0.86, 0.33, 0.45, 0, 0.89, 0, 8, 0)
+transform = Transform3D(-0.7570358, -0.65219223, 0.03927037, 0.5985747, -0.6681945, 0.44184205, -0.26192573, 0.35799655, 0.8962329, 0, 8, 0)
 light_color = Color(0.7, 0.85, 1, 1)
 light_energy = 0.8
 shadow_enabled = true
@@ -55,7 +55,7 @@ shadow_enabled = true
 [node name="Characters" type="Node" parent="." unique_id=997781021]
 
 [node name="Player" parent="Characters" unique_id=1280169849 instance=ExtResource("1_player")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 
 [node name="Controllers" type="Node" parent="." unique_id=68405105]
 script = ExtResource("5_ptr")
@@ -70,12 +70,9 @@ script = ExtResource("6_sk")
 [node name="HUD" parent="." unique_id=1821230634 instance=ExtResource("2_hud")]
 player_path = NodePath("../Characters/Player")
 
-[node name="PauseMenu" parent="." unique_id=749591398 instance=ExtResource("3_menu")]
-player_path = NodePath("../Characters/Player")
-
 [node name="Enemies" type="Node" parent="." unique_id=304746304]
 
-[node name="Pickups" type="Node" parent="."]
+[node name="Pickups" type="Node" parent="." unique_id=1435027759]
 
 [node name="Level" type="Node" parent="." unique_id=878302411]
 
@@ -172,3 +169,6 @@ surface_material_override/0 = SubResource("mat_bubble")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3.4, 13)
 mesh = SubResource("mesh_bubble")
 surface_material_override/0 = SubResource("mat_bubble")
+
+[node name="PauseMenu" parent="." unique_id=749591398 instance=ExtResource("3_menu")]
+player_path = NodePath("../Characters/Player")

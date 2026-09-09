@@ -1,9 +1,10 @@
 extends CanvasLayer
 class_name ShooterHud
 
-## Minimal shooter HUD: crosshair with live spread, ammo readout, reload/empty
-## prompts, hitmarker flash and score/accuracy readout. Reads only public
-## Action/WeaponRig APIs plus the level ScoreKeeper (group lookup).
+## Shooter HUD (Frutiger Aero glass): crosshair with live spread, ammo
+## readout, reload/empty prompts with BBCode animation, hitmarker flash and
+## score/accuracy readout. Reads only public Action/WeaponRig APIs plus the
+## level ScoreKeeper (group lookup). All strings are Spanish.
 
 @export var player_path: NodePath
 
@@ -12,7 +13,7 @@ const SPREAD_PX_PER_DEG := 5.0
 
 @onready var _canvas: ShooterCanvas = $Canvas
 @onready var _ammo_label: Label = $Canvas/AmmoLabel
-@onready var _status_label: Label = $Canvas/StatusLabel
+@onready var _status_label: RichTextLabel = $Canvas/StatusLabel
 @onready var _score_label: Label = $Canvas/ScoreLabel
 @onready var _stats_label: Label = $Canvas/StatsLabel
 
@@ -52,23 +53,24 @@ func _process(delta: float) -> void:
 		empty = state.get("ammo", 0) <= 0
 		var reloading: bool = state.get("reloading", false)
 		if reloading:
-			status = "RELOADING..."
+			status = "[wave amp=14 freq=4][center]RECARGANDO...[/center][/wave]"
 		elif empty:
-			status = "Press R to reload"
+			status = "[color=#ff9b7a][center]PRESIONA R PARA RECARGAR[/center][/color]"
 	if _rig and _rig.has_method("get_current_spread_degrees"):
 		spread_deg = _rig.get_current_spread_degrees()
 
 	_ammo_label.text = ammo_text
 	_ammo_label.add_theme_color_override("font_color", LOW_AMMO_COLOR if empty else Color.WHITE)
-	_status_label.text = status
+	if _status_label.text != status:
+		_status_label.text = status
 	_status_label.visible = status != ""
 
 	var sk := get_tree().get_first_node_in_group("ScoreKeeper")
 	if sk:
-		_score_label.text = "SCORE  %05d" % int(sk.score)
-		_stats_label.text = "HITS %d / %d   ACC %d%%" % [int(sk.hits), int(sk.shots), roundi(sk.get_accuracy() * 100.0)]
+		_score_label.text = "PUNTOS  %05d" % int(sk.score)
+		_stats_label.text = "ACIERTOS %d / %d   PREC %d%%" % [int(sk.hits), int(sk.shots), roundi(sk.get_accuracy() * 100.0)]
 	else:
-		_score_label.text = "SCORE  00000"
+		_score_label.text = "PUNTOS  00000"
 		_stats_label.text = ""
 
 	_canvas.spread_px = spread_deg * SPREAD_PX_PER_DEG

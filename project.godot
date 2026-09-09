@@ -18,7 +18,7 @@ config/name="Frutiger Scape"
 config/description="Third person shotter with VRM anime characters and bot terror."
 config/version="0.1.0"
 config/tags=PackedStringArray("engine", "visualnovel")
-run/main_scene="res://samples/shooter_demo/scenes/shooter_arena.tscn"
+run/main_scene="uid://c0nnnmb3l1ewd"
 config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/bg_color=Color(0.1882353, 0.20392157, 0.27450982, 1)
 boot_splash/stretch_mode=0
@@ -50,6 +50,7 @@ directories/dch_directory={
 "jaime": "res://dialogic/characters/jaime.dch"
 }
 directories/dtl_directory={
+"arena_intro": "res://dialogic/timelines/arena_intro.dtl",
 "brayan-metro_metro": "res://dialogic/characters/brayan-metro_metro.dtl",
 "dancer-metro_metro": "res://dialogic/timelines/dancer-metro_metro.dtl",
 "metro_cinematica": "res://dialogic/timelines/metro_cinematica.dtl",
@@ -58,8 +59,8 @@ directories/dtl_directory={
 "welcome": "res://dialogic/timelines/welcome.dtl"
 }
 glossary/default_case_sensitive=true
-layout/style_list=["res://dialogic/styles/my_new_style.tres"]
-layout/default_style="res://dialogic/styles/my_new_style.tres"
+layout/style_list=["res://dialogic/styles/frutiger_aero_style.tres"]
+layout/default_style="res://dialogic/styles/frutiger_aero_style.tres"
 variables={
 "metro_talk_with_samuel": false,
 "theatre_talk_with_celia": false,
@@ -85,6 +86,10 @@ choices/reveal_by_input=false
 save/autosave_delay=60.0
 save/encryption_on_exports_only=true
 text/autopauses={}
+
+[display]
+
+window/stretch/mode="canvas_items"
 
 [editor_plugins]
 

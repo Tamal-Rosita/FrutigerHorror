@@ -29,5 +29,5 @@ func _on_body_entered(body: Node3D) -> void:
 		return
 	_consumed = true
 	rig.add_reserve(amount)
-	FxBank.popup(get_tree().current_scene, global_position + Vector3.UP * 0.8, "+%d ROUNDS" % amount, Color(0.85, 0.95, 0.5))
+	FxBank.popup(get_tree().current_scene, global_position + Vector3.UP * 0.8, "+%d BALAS" % amount, Color(0.85, 0.95, 0.5))
 	queue_free()

@@ -9,8 +9,9 @@ const VRM_COLLEAGUE: PackedScene = preload("res://samples/shooter_demo/scenes/en
 const BSOD: PackedScene = preload("res://samples/shooter_demo/scenes/enemies/bsod_enemy.tscn")
 const BLISS: PackedScene = preload("res://samples/shooter_demo/scenes/enemies/bliss_enemy.tscn")
 const ERROR: PackedScene = preload("res://samples/shooter_demo/scenes/enemies/error_enemy.tscn")
-const WOUNDED_ALLY: PackedScene = preload("res://samples/shooter_demo/scenes/wounded_ally.tscn")
+const WOUNDED_ALLY: PackedScene = preload("res://samples/shooter_demo/scenes/props/wounded_ally.tscn")
 const AMMO_PICKUP: PackedScene = preload("res://samples/shooter_demo/scenes/pickups/ammo_pickup.tscn")
+const UI_THEME: Theme = preload("res://samples/shooter_demo/ui/shooter_theme.tres")
 
 const SPAWN_RADIUS_MIN := 26.0
 const SPAWN_RADIUS_MAX := 34.0
@@ -27,7 +28,8 @@ var _round_count: int = 0
 var _running: bool = false
 var finished: bool = false
 
-var _banner: Label
+var _banner: RichTextLabel
+var _intro_done: bool = false
 var _wave_label: Label
 var _flash: ColorRect
 var _flash_tween: Tween
@@ -45,7 +47,10 @@ func _ready() -> void:
 	for pos in [Vector3(-6, 0.35, -8), Vector3(6, 0.35, 10), Vector3(-9, 0.35, 12)]:
 		_spawn_ammo_pickup(pos)
 	_replenish_pickups()
-	_start_round(1)
+	# Rounds wait until the player has talked to Celia (novel-engine prompt).
+	Dialogic.timeline_ended.connect(_on_intro_timeline_ended)
+	_wave_label.text = "HABLA CON CELIA (acércate y presiona X)"
+	_show_banner("ELLA TAMBIÉN DESPERTÓ", "habla con Celia antes de que el piso despierte", 4.0)
 
 
 ## The wounded co-worker to defend: speaks when you get close, dies for real.
@@ -55,7 +60,7 @@ func _spawn_ally() -> void:
 	add_child(allies)
 	var ally := WOUNDED_ALLY.instantiate()
 	allies.add_child(ally)
-	ally.global_position = Vector3(-6.0, 0.0, 4.0)
+	ally.global_position = Vector3(-3.4, 0.0, -2.0) # beside the spawn, not on top of it
 	ally.set("player_path", _player.get_path())
 	var ally_health := ally.get_node("Health")
 	ally_health.died.connect(_on_ally_died)
@@ -73,25 +78,49 @@ func _build_ui() -> void:
 	_flash.set_anchors_preset(Control.PRESET_FULL_RECT)
 	layer.add_child(_flash)
 
+	var root := Control.new()
+	root.name = "UI"
+	root.theme = UI_THEME
+	root.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	root.set_anchors_preset(Control.PRESET_FULL_RECT)
+	layer.add_child(root)
+
 	_wave_label = Label.new()
 	_wave_label.name = "WaveLabel"
+	_wave_label.theme_type_variation = &"WaveStatus"
+	_wave_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_wave_label.set_anchors_preset(Control.PRESET_TOP_WIDE)
 	_wave_label.offset_top = 14.0
 	_wave_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_wave_label.add_theme_font_size_override("font_size", 30)
 	_wave_label.add_theme_color_override("font_outline_color", Color(0, 0, 0, 1))
 	_wave_label.add_theme_constant_override("outline_size", 6)
-	layer.add_child(_wave_label)
+	root.add_child(_wave_label)
 
-	_banner = Label.new()
+	_banner = RichTextLabel.new()
 	_banner.name = "Banner"
+	_banner.theme_type_variation = &"BannerRich"
+	_banner.bbcode_enabled = true
+	_banner.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_banner.scroll_active = false
 	_banner.set_anchors_preset(Control.PRESET_CENTER)
-	_banner.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_banner.add_theme_font_size_override("font_size", 64)
-	_banner.add_theme_color_override("font_color", Color(0.75, 0.95, 1))
+	_banner.offset_left = -640.0
+	_banner.offset_top = -170.0
+	_banner.offset_right = 640.0
+	_banner.offset_bottom = 190.0
 	_banner.add_theme_color_override("font_outline_color", Color(0, 0, 0, 1))
-	_banner.add_theme_constant_override("outline_size", 10)
-	layer.add_child(_banner)
+	_banner.add_theme_constant_override("outline_size", 12)
+	root.add_child(_banner)
+
+
+## The ally intro timeline gates the combat: waves begin after the talk.
+func _on_intro_timeline_ended() -> void:
+	if finished or _running:
+		return
+	_wave_label.text = "EL PISO TE RECUERDA"
+	_show_banner("SABE QUE DESPERTASTE", "EL PISO TE RECUERDA", 1.6)
+	await get_tree().create_timer(1.4).timeout
+	if not finished:
+		_start_round(1)
 
 
 func _start_round(round: int) -> void:
@@ -101,8 +130,8 @@ func _start_round(round: int) -> void:
 	_round_count = mini(2 + round * 2, 14)
 	_killed = 0
 	_running = true
-	_show_banner("ROUND %d" % round, "ENEMIES ARE NOT PEOPLE\nSHE TOLD HERSELF", 2.0)
-	_wave_label.text = "ROUND %d — %d targets" % [round, _round_count]
+	_show_banner("RONDA %d" % round, "LOS ENEMIGOS NO SON PERSONAS\nSE DIJO A SÍ MISMA", 2.0)
+	_wave_label.text = "RONDA %d — %d objetivos" % [round, _round_count]
 	_spawn_wave()
 
 
@@ -118,8 +147,8 @@ func _spawn_wave() -> void:
 		await get_tree().create_timer(0.25).timeout
 	if not _running:
 		return
-	_wave_label.text = "FLOOR CLEAR"
-	_show_banner("FLOOR CLEARED", "IT GETS WORSE WHEN YOU REMEMBER THEIR NAMES", 2.2)
+	_wave_label.text = "PISO DESPEJADO"
+	_show_banner("PISO DESPEJADO", "empeora cuando recuerdas sus nombres", 2.2)
 	await get_tree().create_timer(2.6).timeout
 	if _running:
 		if _round >= total_rounds:
@@ -168,7 +197,7 @@ func _pick_enemy_scene() -> PackedScene:
 
 func _on_enemy_down(_target: Node) -> void:
 	_killed += 1
-	_wave_label.text = "ROUND %d — %d left" % [_round, _round_count - _killed]
+	_wave_label.text = "RONDA %d — %d restantes" % [_round, _round_count - _killed]
 
 
 func _on_player_damaged(_amount: int, _hit: Dictionary) -> void:
@@ -182,8 +211,8 @@ func _on_player_damaged(_amount: int, _hit: Dictionary) -> void:
 func _on_victory() -> void:
 	_running = false
 	finished = true
-	_wave_label.text = "LEVEL CLEARED — ESC for menu"
-	_show_banner("THE DREAM ENDS", "you finally remembered to log off", 7.0)
+	_wave_label.text = "NIVEL COMPLETADO — ESC para el menú"
+	_show_banner("EL SUEÑO TERMINA", "por fin recordaste cerrar sesión", 7.0)
 	# Leave the arena running so the player can walk the cleared floor.
 	get_tree().paused = false
 
@@ -192,7 +221,7 @@ func _on_player_died(_hit: Dictionary) -> void:
 	if finished:
 		return
 	_running = false
-	_show_banner("TERMINATED", "you were always the error message", 3.0)
+	_show_banner("TERMINADO", "siempre fuiste el mensaje de error", 3.0)
 	await get_tree().create_timer(2.8).timeout
 	get_tree().reload_current_scene()
 
@@ -201,13 +230,13 @@ func _on_ally_died(_hit: Dictionary) -> void:
 	if not _running or finished:
 		return
 	_running = false
-	_show_banner("SHE DIDN'T WAKE UP", "some people stay logged in forever", 3.0)
+	_show_banner("NO DESPERTÓ", "algunas personas quedan conectadas para siempre", 3.0)
 	await get_tree().create_timer(2.8).timeout
 	get_tree().reload_current_scene()
 
 
 func _show_banner(title: String, subtitle: String, duration: float) -> void:
-	_banner.text = title + "\n" + subtitle
+	_banner.text = "[center][wave amp=16 freq=5]%s[/wave]\n[font_size=30][color=#9fd8ff]%s[/color][/font_size][/center]" % [title, subtitle]
 	_banner.visible = true
 	_banner.modulate = Color(1, 1, 1, 0)
 	var tween := create_tween()

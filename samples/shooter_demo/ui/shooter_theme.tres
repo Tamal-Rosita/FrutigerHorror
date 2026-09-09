@@ -1,0 +1,159 @@
+[gd_resource type="Theme" format=3 uid="uid://b4ewij362t7jg"]
+
+[ext_resource type="FontFile" uid="uid://bm47t16444l3k" path="res://samples/shooter_demo/fonts/ChakraPetch-Regular.ttf" id="1_fr"]
+[ext_resource type="FontFile" uid="uid://tiiv3jw2iwao" path="res://samples/shooter_demo/fonts/ChakraPetch-Bold.ttf" id="2_fb"]
+[ext_resource type="FontFile" uid="uid://mvq2bh8e0nko" path="res://samples/shooter_demo/fonts/ChakraPetch-SemiBold.ttf" id="3_fs"]
+[ext_resource type="FontFile" uid="uid://db01v4o8ayhe7" path="res://samples/shooter_demo/fonts/ChakraPetch-Light.ttf" id="4_fl"]
+[ext_resource type="FontFile" uid="uid://bvx2y4lqbbnxq" path="res://samples/shooter_demo/fonts/VT323-Regular.ttf" id="5_fv"]
+
+[sub_resource type="StyleBoxFlat" id="sb_focus"]
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5, 0.9, 1, 0.8)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="sb_btn_hover"]
+content_margin_left = 16.0
+content_margin_top = 6.0
+content_margin_right = 16.0
+content_margin_bottom = 6.0
+bg_color = Color(0.1, 0.38, 0.55, 0.75)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.55, 0.95, 1, 0.9)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="sb_btn_pressed"]
+content_margin_left = 16.0
+content_margin_top = 6.0
+content_margin_right = 16.0
+content_margin_bottom = 6.0
+bg_color = Color(0.15, 0.6, 0.85, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.85, 0.98, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="sb_btn_normal"]
+content_margin_left = 16.0
+content_margin_top = 6.0
+content_margin_right = 16.0
+content_margin_bottom = 6.0
+bg_color = Color(0.06, 0.22, 0.34, 0.55)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.3, 0.8, 1, 0.35)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="sb_panel"]
+content_margin_left = 20.0
+content_margin_top = 16.0
+content_margin_right = 20.0
+content_margin_bottom = 16.0
+bg_color = Color(0.008, 0.05, 0.09, 0.92)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.35, 0.85, 1, 0.4)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0, 0, 0, 0.45)
+shadow_size = 12
+
+[resource]
+default_font = ExtResource("1_fr")
+default_font_size = 18
+BannerRich/base_type = &"RichTextLabel"
+BannerRich/colors/default_color = Color(0.85, 0.98, 1, 1)
+BannerRich/font_sizes/bold_font_size = 60
+BannerRich/font_sizes/bold_italics_font_size = 60
+BannerRich/font_sizes/italics_font_size = 60
+BannerRich/font_sizes/normal_font_size = 60
+BannerRich/fonts/bold_font = ExtResource("2_fb")
+BannerRich/fonts/bold_italics_font = ExtResource("2_fb")
+BannerRich/fonts/italics_font = ExtResource("4_fl")
+BannerRich/fonts/normal_font = ExtResource("2_fb")
+Button/colors/font_color = Color(0.78, 0.93, 1, 1)
+Button/colors/font_disabled_color = Color(0.5, 0.6, 0.66, 0.5)
+Button/colors/font_focus_color = Color(0.95, 1, 1, 1)
+Button/colors/font_hover_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/font_sizes/font_size = 20
+Button/styles/focus = SubResource("sb_focus")
+Button/styles/hover = SubResource("sb_btn_hover")
+Button/styles/hover_pressed = SubResource("sb_btn_pressed")
+Button/styles/normal = SubResource("sb_btn_normal")
+Button/styles/pressed = SubResource("sb_btn_pressed")
+HudStatusRich/base_type = &"RichTextLabel"
+HudStatusRich/colors/default_color = Color(0.95, 1, 1, 1)
+HudStatusRich/font_sizes/bold_font_size = 26
+HudStatusRich/font_sizes/bold_italics_font_size = 26
+HudStatusRich/font_sizes/italics_font_size = 26
+HudStatusRich/font_sizes/normal_font_size = 26
+HudStatusRich/fonts/bold_font = ExtResource("3_fs")
+HudStatusRich/fonts/bold_italics_font = ExtResource("3_fs")
+HudStatusRich/fonts/italics_font = ExtResource("4_fl")
+HudStatusRich/fonts/normal_font = ExtResource("3_fs")
+Label/colors/font_color = Color(0.93, 0.98, 1, 1)
+MenuTitle/base_type = &"Label"
+MenuTitle/colors/font_color = Color(0.62, 0.88, 1, 1)
+MenuTitle/font_sizes/font_size = 32
+MenuTitle/fonts/font = ExtResource("3_fs")
+PanelContainer/styles/panel = SubResource("sb_panel")
+RichTextLabel/colors/default_color = Color(0.93, 0.99, 1, 1)
+RichTextLabel/fonts/bold_font = ExtResource("2_fb")
+RichTextLabel/fonts/bold_italics_font = ExtResource("2_fb")
+RichTextLabel/fonts/italics_font = ExtResource("4_fl")
+RichTextLabel/fonts/mono_font = ExtResource("5_fv")
+RichTextLabel/fonts/normal_font = ExtResource("1_fr")
+ScoreDigits/base_type = &"Label"
+ScoreDigits/colors/font_color = Color(0.7, 0.95, 1, 1)
+ScoreDigits/font_sizes/font_size = 30
+ScoreDigits/fonts/font = ExtResource("5_fv")
+StatsLine/base_type = &"Label"
+StatsLine/colors/font_color = Color(0.75, 0.92, 1, 1)
+StatsLine/font_sizes/font_size = 17
+StatsLine/fonts/font = ExtResource("3_fs")
+SubtitleRich/base_type = &"RichTextLabel"
+SubtitleRich/colors/default_color = Color(0.9, 0.98, 1, 1)
+SubtitleRich/font_sizes/bold_font_size = 22
+SubtitleRich/font_sizes/bold_italics_font_size = 22
+SubtitleRich/font_sizes/italics_font_size = 22
+SubtitleRich/font_sizes/normal_font_size = 22
+SubtitleRich/fonts/bold_font = ExtResource("3_fs")
+SubtitleRich/fonts/bold_italics_font = ExtResource("3_fs")
+SubtitleRich/fonts/italics_font = ExtResource("4_fl")
+SubtitleRich/fonts/normal_font = ExtResource("3_fs")
+TerminalText/base_type = &"Label"
+TerminalText/colors/font_color = Color(1, 1, 1, 1)
+TerminalText/font_sizes/font_size = 42
+TerminalText/fonts/font = ExtResource("5_fv")
+WaveStatus/base_type = &"Label"
+WaveStatus/colors/font_color = Color(0.9, 0.99, 1, 1)
+WaveStatus/font_sizes/font_size = 26
+WaveStatus/fonts/font = ExtResource("3_fs")

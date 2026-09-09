@@ -51,10 +51,9 @@ parameters/Locomotion/conditions/NO_AIM = false
 parameters/Locomotion/conditions/NO_RELOAD = false
 parameters/Locomotion/conditions/RELOADING = false
 parameters/Locomotion/Aim/blend_position = 0.0
-parameters/Locomotion/Motion/blend_position = 0.7935813
 parameters/FaceExpression/mood_amount/blend_amount = 1.0
-parameters/LeftBlink/blend_position = 0.1602300000000001
-parameters/RightBlink/blend_position = 0.1602300000000001
+parameters/LeftBlink/blend_position = 0.0
+parameters/RightBlink/blend_position = 0.0
 parameters/LocomotionBlend/blend_amount = 1.0
 parameters/Pose/current_index = 1
 parameters/DancingSpeed/scale = 0.8800000000000026
@@ -101,5 +100,5 @@ script = ExtResource("12_hp")
 
 [node name="HealthBar" type="Node3D" parent="." index="10" unique_id=1330065647]
 script = ExtResource("13_bar")
-caption = "YOU"
+caption = "TÚ"
 show_only_when_hurt = true

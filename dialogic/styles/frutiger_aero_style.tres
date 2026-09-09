@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="DialogicStyle" format=3 uid="uid://c7nallo8me862"]
+[gd_resource type="Resource" script_class="DialogicStyle" format=3 uid="uid://c6i5seqeumdu1"]
 
 [ext_resource type="Script" uid="uid://00ymgd85ioap" path="res://addons/dialogic/Resources/dialogic_style_layer.gd" id="1_68io8"]
+[ext_resource type="PackedScene" uid="uid://cqpb3ie51rwl5" path="res://addons/dialogic/Modules/DefaultLayoutParts/Base_Default/default_layout_base.tscn" id="1_x0ryk"]
 [ext_resource type="PackedScene" uid="uid://c1k5m0w3r40xf" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_FullBackground/full_background_layer.tscn" id="2_w6rv2"]
 [ext_resource type="PackedScene" uid="uid://cy1y14inwkplb" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_VN_Portraits/vn_portrait_layer.tscn" id="3_vxfc6"]
 [ext_resource type="PackedScene" uid="uid://cn674foxwedqu" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_Input/full_advance_input_layer.tscn" id="4_k8uu8"]
@@ -13,6 +14,7 @@
 
 [sub_resource type="Resource" id="Resource_0p5lx"]
 script = ExtResource("1_68io8")
+scene = ExtResource("1_x0ryk")
 
 [sub_resource type="Resource" id="Resource_ksvtn"]
 script = ExtResource("1_68io8")
@@ -29,6 +31,26 @@ scene = ExtResource("4_k8uu8")
 [sub_resource type="Resource" id="Resource_meg8i"]
 script = ExtResource("1_68io8")
 scene = ExtResource("5_3bicu")
+overrides = {
+"bold_font": "res://samples/shooter_demo/fonts/ChakraPetch-SemiBold.ttf",
+"bold_italics_font": "res://samples/shooter_demo/fonts/ChakraPetch-SemiBold.ttf",
+"box_color_custom": "Color(1, 1, 1, 1)",
+"box_color_use_global": "false",
+"box_panel": "res://samples/shooter_demo/ui/dialogic/frutiger_textbox_panel.tres",
+"italics_font": "res://samples/shooter_demo/fonts/ChakraPetch-Light.ttf",
+"name_label_box_modulate": "Color(1, 1, 1, 1)",
+"name_label_box_offset": "Vector2(0, -2)",
+"name_label_box_panel": "res://samples/shooter_demo/ui/dialogic/frutiger_name_label_panel.tres",
+"name_label_box_use_global_color": "false",
+"name_label_custom_font_size": "21",
+"name_label_font": "res://samples/shooter_demo/fonts/ChakraPetch-SemiBold.ttf",
+"name_label_use_global_font": "false",
+"name_label_use_global_font_size": "false",
+"normal_font": "res://samples/shooter_demo/fonts/ChakraPetch-Regular.ttf",
+"text_size": "20",
+"text_use_global_font": "false",
+"text_use_global_size": "false"
+}
 
 [sub_resource type="Resource" id="Resource_hktbx"]
 script = ExtResource("1_68io8")
@@ -48,7 +70,7 @@ scene = ExtResource("9_uehbe")
 
 [resource]
 script = ExtResource("10_xnh8l")
-name = "my_new_style"
+name = "frutiger_aero_style"
 layer_list = Array[String](["10", "11", "12", "13", "14", "15", "16", "17"])
 layer_info = {
 "": SubResource("Resource_0p5lx"),
@@ -61,4 +83,4 @@ layer_info = {
 "16": SubResource("Resource_36dsa"),
 "17": SubResource("Resource_fa6em")
 }
-metadata/_latest_layer = "14"
+metadata/_latest_layer = "17"

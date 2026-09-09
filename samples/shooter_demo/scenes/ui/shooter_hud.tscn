@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://un017tn1kqlu"]
+
+[ext_resource type="Script" uid="uid://dhom0xevfenuj" path="res://samples/shooter_demo/scripts/ui/shooter_hud.gd" id="1_hud"]
+[ext_resource type="Script" uid="uid://cnkp1l3vvor2l" path="res://samples/shooter_demo/scripts/ui/shooter_canvas.gd" id="2_cv"]
+[ext_resource type="Theme" uid="uid://b4ewij362t7jg" path="res://samples/shooter_demo/ui/shooter_theme.tres" id="3_thm"]
+
+[node name="ShooterHud" type="CanvasLayer" unique_id=285780988]
+script = ExtResource("1_hud")
+
+[node name="Canvas" type="Control" parent="." unique_id=1161298041]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("3_thm")
+script = ExtResource("2_cv")
+
+[node name="AmmoLabel" type="Label" parent="Canvas" unique_id=2034626472]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -108.0
+offset_right = -24.0
+offset_bottom = -48.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_type_variation = &"MenuTitle"
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+text = "30 / 120"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="StatusLabel" type="RichTextLabel" parent="Canvas" unique_id=846484405]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -460.0
+offset_top = -210.0
+offset_right = 460.0
+offset_bottom = -150.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_type_variation = &"HudStatusRich"
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.55)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 8
+bbcode_enabled = true
+scroll_active = false
+
+[node name="ScoreLabel" type="Label" parent="Canvas" unique_id=1824605791]
+layout_mode = 1
+offset_left = 28.0
+offset_top = 18.0
+offset_right = 460.0
+offset_bottom = 54.0
+theme_type_variation = &"ScoreDigits"
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+text = "PUNTOS  00000"
+
+[node name="StatsLabel" type="Label" parent="Canvas" unique_id=1872783915]
+layout_mode = 1
+offset_left = 30.0
+offset_top = 58.0
+offset_right = 460.0
+offset_bottom = 92.0
+theme_type_variation = &"StatsLine"
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5

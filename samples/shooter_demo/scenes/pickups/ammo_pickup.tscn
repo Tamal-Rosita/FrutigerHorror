@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://samples/shooter_demo/scripts/combat/ammo_pickup.gd" id="1_ammo"]
+[ext_resource type="FontFile" uid="uid://bvx2y4lqbbnxq" path="res://samples/shooter_demo/fonts/VT323-Regular.ttf" id="2_fnt"]
 
 [sub_resource type="StandardMaterial3D" id="mat_case"]
 albedo_color = Color(0.45, 0.55, 0.25, 1)
@@ -37,7 +38,8 @@ surface_material_override/0 = SubResource("mat_band")
 
 [node name="Label" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
-text = "+BULLETS"
+font = ExtResource("2_fnt")
+text = "+BALAS"
 font_size = 42
 pixel_size = 0.008
 outline_size = 8

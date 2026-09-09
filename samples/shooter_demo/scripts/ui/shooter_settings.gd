@@ -94,6 +94,7 @@ func _quit() -> void:
 func _pause() -> void:
 	_sync_sliders_from_camera()
 	_show(_main_panel)
+	$Backdrop.visible = true
 	$Panel.visible = true
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	get_tree().paused = true
@@ -101,6 +102,7 @@ func _pause() -> void:
 
 func _resume() -> void:
 	_show(_main_panel)
+	$Backdrop.visible = false
 	$Panel.visible = false
 	_save_config()
 	get_tree().paused = false

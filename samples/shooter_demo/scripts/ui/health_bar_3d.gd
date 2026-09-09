@@ -13,6 +13,8 @@ class_name HealthBar3D
 @export var gaze_target_path: NodePath = NodePath("../GazeTarget")
 @export var show_only_when_hurt: bool = false
 
+const CAPTION_FONT: FontFile = preload("res://samples/shooter_demo/fonts/ChakraPetch-SemiBold.ttf")
+
 const BG_COLOR := Color(0.05, 0.05, 0.07, 0.6)
 const FULL_COLOR := Color(0.3, 0.85, 0.45, 0.95)
 const EMPTY_COLOR := Color(0.9, 0.2, 0.2, 0.95)
@@ -84,6 +86,7 @@ func _build() -> void:
 
 	if caption != "":
 		_label = Label3D.new()
+		_label.font = CAPTION_FONT
 		_label.text = caption
 		_label.font_size = 26
 		_label.pixel_size = 0.006

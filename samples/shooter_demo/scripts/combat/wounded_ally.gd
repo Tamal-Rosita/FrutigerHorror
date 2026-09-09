@@ -11,14 +11,16 @@ signal downed(target: Node)
 const NOVEL_BASE: PackedScene = preload("res://visual-novel/characters/novel_character_base.tscn")
 const CELIA_MODEL: PackedScene = preload("res://visual-novel/GJDDM/characters/packed/celia.scn")
 const CELIA_DCH: Resource = preload("res://dialogic/characters/Celia.dch")
+const INTRO_TL: Resource = preload("res://dialogic/timelines/arena_intro.dtl")
+const UI_THEME: Theme = preload("res://samples/shooter_demo/ui/shooter_theme.tres")
 
 const LINES: Array[String] = [
-	"I keep seeing the icons move when nobody is looking...",
-	"It started in Excel. The cells kept... *counting* themselves.",
-	"The presentation said 'Welcome' and then the hills started walking.",
-	"That rifle was not in my desk yesterday.",
-	"They are not angry. They are just... *default*.",
-	"Don't let them reach the cubicles again.",
+	"Sigo viendo los íconos moverse cuando nadie los mira...",
+	"Empezó en Excel. Las celdas no dejaban de *contarse* solas.",
+	"La presentación dijo «Bienvenida» y las colinas empezaron a caminar.",
+	"Ese rifle no estaba en mi escritorio ayer.",
+	"No están enojados. Solo están... *por defecto*.",
+	"No dejes que vuelvan a llegar a los cubículos.",
 ]
 
 @export var player_path: NodePath
@@ -29,7 +31,7 @@ const LINES: Array[String] = [
 var _inner: NovelCharacter
 var _line_index: int = 0
 var _next_line_at: float = 0.0
-var _subtitle: Label
+var _subtitle: RichTextLabel
 var _subtitle_tween: Tween
 
 
@@ -49,14 +51,14 @@ func _build_inner() -> void:
 	_inner.dialogic_character = CELIA_DCH
 	_inner.vrm_scene = CELIA_MODEL
 	_inner.default_pose_amount = 1.0 # wounded: keeps the standing pose, no locomotion
-	_inner.remove_from_group("ControllableCharacter")
-	# She stays interactable in spirit, but has no timeline: the handler exits
-	# early without touching the player. Keep the interaction area OFF anyway
-	# so the arena doesn't spam VN prompts.
+	_inner.character_timeline = INTRO_TL
+	# Keep her in ControllableCharacter so player bullets pass through and the
+	# novel-engine interaction prompt works normally (press X near her).
 	var area := _inner.collision_shape.get_node_or_null("InteractionArea3D")
 	if area:
-		(area as Area3D).monitoring = false
-		(area as Area3D).monitorable = false
+		# Left enabled for the novel prompt; deferred to avoid signal-time flips.
+		(area as Area3D).set_deferred("monitoring", true)
+		(area as Area3D).set_deferred("monitorable", true)
 	call_deferred("_repair_animation_root")
 	await get_tree().create_timer(0.1).timeout
 	if is_inside_tree():
@@ -81,7 +83,7 @@ func take_damage(amount: int, hit: Dictionary = {}) -> void:
 func _on_died(_hit: Dictionary) -> void:
 	downed.emit(self)
 	_hide_subtitle()
-	FxBank.popup(get_tree().current_scene, global_position + Vector3.UP * 1.8, "SHE STOPPED DREAMING", Color(0.9, 0.4, 0.4))
+	FxBank.popup(get_tree().current_scene, global_position + Vector3.UP * 1.8, "DEJÓ DE SOÑAR", Color(0.9, 0.4, 0.4))
 
 
 func _process(_delta: float) -> void:
@@ -92,6 +94,8 @@ func _process(_delta: float) -> void:
 		player = get_node_or_null(player_path) as Node3D
 	if player == null or not is_instance_valid(player):
 		return
+	if Dialogic.current_timeline != null:
+		return # the novel dialogue is on screen; whispers wait
 	var now := Time.get_ticks_msec() / 1000.0
 	var dist: float = player.global_position.distance_to(global_position)
 	if dist <= whisper_range and now >= _next_line_at:
@@ -111,16 +115,20 @@ func _build_subtitle() -> void:
 	var layer := CanvasLayer.new()
 	layer.name = "AllySubtitles"
 	add_child(layer)
-	_subtitle = Label.new()
+	_subtitle = RichTextLabel.new()
 	_subtitle.name = "Subtitle"
+	_subtitle.theme = UI_THEME
+	_subtitle.theme_type_variation = &"SubtitleRich"
+	_subtitle.bbcode_enabled = true
+	_subtitle.scroll_active = false
 	_subtitle.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
-	_subtitle.offset_top = -150.0
-	_subtitle.offset_bottom = -40.0
-	_subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_subtitle.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_subtitle.add_theme_font_size_override("font_size", 24)
+	_subtitle.offset_top = -250.0
+	_subtitle.offset_bottom = -70.0
 	_subtitle.add_theme_color_override("font_outline_color", Color(0, 0, 0, 1))
-	_subtitle.add_theme_constant_override("outline_size", 6)
+	_subtitle.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.55))
+	_subtitle.add_theme_constant_override("outline_size", 8)
+	_subtitle.add_theme_constant_override("shadow_offset_x", 2)
+	_subtitle.add_theme_constant_override("shadow_offset_y", 3)
 	_subtitle.visible = false
 	layer.add_child(_subtitle)
 
@@ -128,7 +136,7 @@ func _build_subtitle() -> void:
 func _show_subtitle(speaker: String, text: String) -> void:
 	if _subtitle_tween and _subtitle_tween.is_valid():
 		_subtitle_tween.kill()
-	_subtitle.text = "%s: %s" % [speaker, text]
+	_subtitle.text = "[center][color=#8fd8ff][b]%s:[/b][/color] %s[/center]" % [speaker, _to_bbcode(text)]
 	_subtitle.modulate = Color(1, 1, 1, 0)
 	_subtitle.visible = true
 	_subtitle_tween = create_tween()
@@ -136,6 +144,18 @@ func _show_subtitle(speaker: String, text: String) -> void:
 	_subtitle_tween.tween_interval(3.6)
 	_subtitle_tween.tween_property(_subtitle, "modulate:a", 0.0, 0.4)
 	_subtitle_tween.tween_callback(func() -> void: _subtitle.visible = false)
+
+
+## Converts *asterisk* spans into BBCode italics ([i]…[/i]).
+static func _to_bbcode(line: String) -> String:
+	var parts := line.split("*")
+	var out := ""
+	for i in parts.size():
+		if i % 2 == 1:
+			out += "[i]" + parts[i] + "[/i]"
+		else:
+			out += parts[i]
+	return out
 
 
 func _hide_subtitle() -> void:
